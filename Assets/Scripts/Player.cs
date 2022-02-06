@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Weapon_0[] WeaponSystems;
+    private int _WeaponIndex = 0; 
     Rigidbody2D rb;//Variable en la cual se almacenara el objeto player
     float shipAngle;//angulo en el que se encuentra el jugador
 
@@ -46,6 +48,31 @@ public class Player : MonoBehaviour
         {
             isFire = false;
         }
+
+        //Weapon sistem
+        if(Input.GetKey(KeyCode.Space))
+        {
+            WeaponSystems[_WeaponIndex].Fire();
+        }
+
+        if(Input.GetKey(KeyCode.Q))
+        {
+            _WeaponIndex--;
+            if(_WeaponIndex < 0)
+            {
+                _WeaponIndex = WeaponSystems.Length - 1;
+            }
+        }
+
+        if(Input.GetKey(KeyCode.E))
+        {
+            _WeaponIndex++;
+            if(_WeaponIndex > WeaponSystems.Length)
+            {
+                _WeaponIndex = 0;
+            }
+        }
+
     }
 
     void FixedUpdate()//mejora las fisicas del personaje (física continua constante)
